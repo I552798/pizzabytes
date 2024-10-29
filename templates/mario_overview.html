@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario order overview</title>
+</head>
+<body>
+    <header>
+        <h1>Order overview</h1>
+        <button>Order</button>
+    </header>
+    <table>
+        <thead>Preparing</thead>
+        {% for order in orders %}
+        <tbody>
+            <tr>
+                <th>{{order.pizza}}</th>
+                <td>{{order.timer}}</td>
+                <td>{{order.table}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <table>
+        <thead>Ready</thead>
+        {% for order in orders %}
+        <tbody>
+            <tr>
+                <th>{{order.pizza}}</th>
+                <td>{{order.status}}</td>
+                <td>{{order.table}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+</html>
