@@ -18,8 +18,19 @@ def  payment():
 
 @app.route('/order/status')
 def  order_status():
-    return  render_template('order_status.html')
+    return render_template('order_status.html')
 
+@app.route('/mario/order/overview')
+def mario_order_overview():
+    return render_template('mario_order_overview.html')
+
+@app.route('/mario/orders')
+def mario_orders():
+    return render_template('mario_orders.html')
+
+@app.route('/luigi/orders')
+def luigi_orders():
+    return render_template('luigi_orders.html')
 
 
 
