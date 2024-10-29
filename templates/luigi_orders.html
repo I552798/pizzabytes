@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luigi orders</title>
+</head>
+<body>
+    <header>
+        <h1>Orders</h1>
+    </header>
+    {% for order, ingredients in orders %}
+    <ol>
+        <li>
+            {{order.pizza}}
+            {{order.ingredients}}
+            <input type="checkbox" name="Checkbox" value="yes">
+        </li>
+    </ol>
+    {% endfor %}
+</body>
+</html>
