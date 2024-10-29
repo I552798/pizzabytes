@@ -13,11 +13,11 @@ def order_overview():
     return render_template('order_overview.html')
 
 @app.route('/payment')
-def  payment():
+def payment():
     return render_template('payment.html')
 
 @app.route('/order/status')
-def  order_status():
+def order_status():
     return render_template('order_status.html')
 
 @app.route('/mario/order/overview')
