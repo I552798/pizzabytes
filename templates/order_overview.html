@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order overview</title>
+</head>
+<body>
+
+    <h1>Order overview</h1>
+
+    <table>
+        {% for pizza in pizzas %}
+        <tr>
+            <td>{{ pizza.quantity }}</td>
+            <td>{{ pizza.name }}</td>
+            <td>${{ pizza.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p>Total Price: ${{ total_price }}</p>
+
+    <div>
+        <a href="/menu">Back</a>
+        <a href="/payment">Next</a>
+    </div>
+
+</body>
+</html>
