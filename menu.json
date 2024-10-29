@@ -1,0 +1,24 @@
+{
+    "menu":[
+        {
+            "name": "Pepperoni",
+            "price": "€13.10",
+            "ingredients": "Hand-tossed dough, house-made tomato sauce, mozzarella cheese, and savory pepperoni"
+        } ,
+        {
+            "name": "Margherita",
+            "price": "€12.95",
+            "ingredients": "Hand-tossed dough, tomato sauce, fresh mozzarella, vine-ripened tomatoes, fresh basil, and extra virgin olive oil."
+        },
+        {
+            "name": "Prosciutto",
+            "price": "€16.70",
+            "ingredients": "Hand-tossed dough, tomato sauce, fresh mozzarella, thinly sliced prosciutto, arugula, shaved Parmesan, and extra virgin olive oil."
+        },
+        {
+            "name": "Patron",
+            "price": "€23.99",
+            "ingredients": "Hand-stretched dough, tomato sauce, mozzarella cheese, pepperoni, Italian sausage, green bell peppers, red onions, mushrooms, and black olives."
+        }
+    ]
+}
