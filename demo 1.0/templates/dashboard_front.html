@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Dashboard</title>
+</head>
+<body>
+    <h1>Front Dashboard</h1>
+    <h2>Available Tables</h2>
+    <ul>
+        {% for table_number, status in tables.items() %}
+            <li>
+                Table {{ table_number }}: {{ status }}
+                {% if status == "Occupied" %}
+                    <a href="{{ url_for('update_table', table_number=table_number) }}">Free Table</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Current Orders</h2>
+    <ul>
+        {% for order in orders %}
+            <li>Table {{ order['table'] }} - Pizza: {{ order['pizza'] }} - Status: {{ order['status'] }}</li>
+        {% endfor %}
+    </ul>
+    
+    <nav>
+        <a href="{{ url_for('new_order') }}">Create New Order</a>
+    </nav>
+</body>
+</html>
