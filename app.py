@@ -4,13 +4,14 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-
+# Sample menu data
 menu = [
-     {"name": "Pepperoni", "price": 13.10, "description": "Hand-tossed dough, house-made tomato sauce, mozzarella cheese, and savory pepperoni."},
-     {"name": "Margherita", "price": 12.95, "description": "Hand-tossed dough, tomato sauce, fresh mozzarella, vine-ripened tomatoes, fresh basil, and extra virgin olive oil."},
-     {"name": "Prosciutto", "price": 16.70, "description": "Hand-tossed dough, tomato sauce, fresh mozzarella, thinly sliced prosciutto, arugula, shaved Parmesan, and extra virgin olive oil."},
-     {"name": "Patron", "price": 23.99, "description": "Hand-stretched dough, tomato sauce, mozzarella cheese, pepperoni, Italian sausage, green bell peppers, red onions, mushrooms, and black olives."},
+    {"name": "Pepperoni", "price": 13.10, "description": "Hand-tossed dough, house-made tomato sauce, mozzarella cheese, and savory pepperoni."},
+    {"name": "Margherita", "price": 12.95, "description": "Hand-tossed dough, tomato sauce, fresh mozzarella, vine-ripened tomatoes, fresh basil, and extra virgin olive oil."},
+    {"name": "Prosciutto", "price": 16.70, "description": "Hand-tossed dough, tomato sauce, fresh mozzarella, thinly sliced prosciutto, arugula, shaved Parmesan, and extra virgin olive oil."},
+    {"name": "Patron", "price": 23.99, "description": "Hand-stretched dough, tomato sauce, mozzarella cheese, pepperoni, Italian sausage, green bell peppers, red onions, mushrooms, and black olives."},
 ]
+
 # Orders list to store current orders
 orders = []
 mario_orders = []
@@ -24,7 +25,6 @@ def home():
 def menu_page():
     if request.method == 'POST':
         global orders
-        orders = []  # Clear previous orders for a fresh session
 
         # Process selected pizzas and their quantities
         for pizza in menu:
@@ -49,15 +49,13 @@ def order_overview():
     total = sum(order['price'] * order['quantity'] for order in orders)
     return render_template('order_overview.html', orders=orders, total=total)
 
-
 @app.route('/payment')
 def payment():
     return render_template('payment.html')
 
-
 @app.route('/order/status')
 def order_status():
-    return render_template('order_status.html')
+    return render_template('order_status.html', orders=orders)
 
 @app.route('/mario/orders', methods=['GET', 'POST'])
 def mario_orders_page():
@@ -68,29 +66,30 @@ def mario_orders_page():
         prosciutto = int(request.form.get('prosciutto', 0))
         patron = int(request.form.get('patron', 0))
 
-        # Add orders for the selected table
+        # Add orders for the selected table with default status
         if pepperoni > 0:
-            orders.append({"table": table, "name": "Pepperoni", "price": 13.10, "quantity": pepperoni})
+            orders.append({"table": table, "name": "Pepperoni", "price": 13.10, "quantity": pepperoni, "status": "Preparing"})
         if margherita > 0:
-            orders.append({"table": table, "name": "Margherita", "price": 12.95, "quantity": margherita})
+            orders.append({"table": table, "name": "Margherita", "price": 12.95, "quantity": margherita, "status": "Preparing"})
         if prosciutto > 0:
-            orders.append({"table": table, "name": "Prosciutto", "price": 16.70, "quantity": prosciutto})
+            orders.append({"table": table, "name": "Prosciutto", "price": 16.70, "quantity": prosciutto, "status": "Preparing"})
         if patron > 0:
-            orders.append({"table": table, "name": "Patron", "price": 23.99, "quantity": patron})
+            orders.append({"table": table, "name": "Patron", "price": 23.99, "quantity": patron, "status": "Preparing"})
 
         return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
-    luigi_orders={
+    luigi_orders = {
         "client": orders,
         "mario": mario_orders
     }
-    return render_template('luigi_orders.html',luigi_orders=luigi_orders)
+    return render_template('luigi_orders.html', luigi_orders=luigi_orders)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
