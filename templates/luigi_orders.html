@@ -9,23 +9,16 @@
     <header>
         <h1>Orders</h1>
     </header>
-    
+    {% for order in orders %}
     <ul>
-        {% if luigi_orders['client'] %}
-            {% for order in luigi_orders['client'] %}
-                <li>{{ order.quantity }}x {{ order.name }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No orders found.</li>
-        {% endif %}
+        <li>
+            {% if order.quantity > 0 %}
+                <p>{{order.quantity}}x {{order.name}} </p>
+                {% else %}
+                <p>No orders</p>
+            {% endif %}
+        </li>
     </ul>
-
-    <ul>
-        {% if luigi_orders['mario'] %}
-            {% for order in luigi_orders['mario'] %}
-                <li>{{ order.quantity }}x {{ order.name }}</li>
-            {% endfor %}
-        {% endif %}
-    </ul>
+    {% endfor %}
 </body>
 </html>

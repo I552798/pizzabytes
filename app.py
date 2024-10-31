@@ -14,35 +14,37 @@ menu = [
 
 # Orders list to store current orders
 orders = []
-mario_orders = []
+order_index = 0
 
 @app.route('/')
 def home():
     # Redirect to the menu page
     return redirect(url_for('menu_page'))
 
-@app.route('/menu', methods=['GET', 'POST'])
-def menu_page():
+@app.route('/menu/<int:table>', methods=['GET', 'POST'])
+def menu_page(table):
     if request.method == 'POST':
         global orders
 
         # Process selected pizzas and their quantities
         for pizza in menu:
             pizza_name = pizza['name']
+            pizza_price = pizza['price']
             quantity = request.form.get(f'quantity_{pizza_name}')  # Get the quantity for this pizza
             selected = request.form.getlist('selected_pizza')  # Get list of selected pizzas
 
             if pizza_name in selected and quantity.isdigit() and int(quantity) > 0:
                 # Add selected pizza, quantity, and default status to the order
                 orders.append({
+                    "table": table,
                     "name": pizza_name,
-                    "price": pizza['price'],
+                    "price": pizza_price,
                     "quantity": int(quantity),
                     "status": "Preparing"  # Default status for new orders
                 })
         
         return redirect(url_for('order_overview'))
-    return render_template('customer_order_page.html', menu=menu)
+    return render_template('customer_order_page.html', menu=menu, table=table)
 
 @app.route('/order/overview')
 def order_overview():
@@ -81,11 +83,25 @@ def mario_orders_page():
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
-    luigi_orders = {
-        "client": orders,
-        "mario": mario_orders
-    }
-    return render_template('luigi_orders.html', luigi_orders=luigi_orders)
+    return render_template('luigi_orders.html', orders=orders)
+
+@app.route('/mark_order_completed', methods=['POST'])
+def mark_next_order_completed():
+    global order_index
+
+    data = request.get_json() 
+    if order_index < len(orders):
+        if data and "message" in data:
+            # Decrease the quantity of the current order
+            orders[order_index]["quantity"] -= 1
+            
+            # Check if the quantity has reached zero
+            if orders[order_index]["quantity"] <= 0:
+                orders[order_index]["status"] = "Completed"
+                order_index += 1
+
+    if order_index >= len(orders):  # Ensure the order_index is within bounds
+        order_index = 0
 
 if __name__ == '__main__':
     app.run(debug=True)
