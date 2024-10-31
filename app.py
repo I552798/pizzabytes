@@ -22,13 +22,26 @@ def home():
 @app.route('/menu', methods=['GET', 'POST'])
 def menu_page():
     if request.method == 'POST':
-        pizza_name = request.form.get('pizza_name')
-        quantity = request.form.get('quantity')
+        # Clear the orders for a new session
+        global orders
+        orders = []  # Reset orders for a new submission
+
+        # Process selected pizzas and their quantities
+        for pizza in menu:
+            pizza_name = pizza['name']
+            quantity = request.form.get(f'quantity_{pizza_name}')  # Get the quantity for this pizza
+            selected = request.form.getlist('selected_pizza')  # Get list of selected pizzas
+            
+            if pizza_name in selected and quantity.isdigit() and int(quantity) > 0:
+                # Add selected pizza and quantity to the order
+                orders.append({
+                    "name": pizza_name,
+                    "price": pizza['price'],
+                    "quantity": int(quantity)
+                })
         
-        # Add selected pizza and quantity to the order
-        if quantity.isdigit() and int(quantity) > 0:
-            orders.append({"name": pizza_name, "price": next(item['price'] for item in menu if item['name'] == pizza_name), "quantity": int(quantity)})
         return redirect(url_for('order_overview'))
+
     return render_template('customer_order_page.html', menu=menu)
 
 @app.route('/order/overview')

@@ -16,13 +16,16 @@
     <form action="/menu" method="post">
         {% for pizza in menu %}
             <div>
-                <img src="static/images/{{ pizza.name | lower }}.png" alt="{{ pizza.name }}">
+                <img src="static/images/{{ pizza.name | lower }}.png" alt="{{ pizza.name }}" style="width: 150px; height: auto;">
                 <h4>{{ pizza.name }}</h4>
                 <p>Description: {{ pizza.description }}</p>
                 <p>Price: &euro;{{ pizza.price }}</p>
+                <label>
+                    <input type="checkbox" name="selected_pizza" value="{{ pizza.name }}">
+                    Select this pizza
+                </label>
                 <label for="quantity_{{ pizza.name }}">Quantity:</label>
-                <input type="text" id="quantity_{{ pizza.name }}" name="quantity" placeholder="Enter the quantity...">
-                <input type="hidden" name="pizza_name" value="{{ pizza.name }}">
+                <input type="number" id="quantity_{{ pizza.name }}" name="quantity_{{ pizza.name }}" min="0" placeholder="0">
             </div>
             <br>
         {% endfor %}
