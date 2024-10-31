@@ -9,12 +9,10 @@
     <header>
         <h1>Orders</h1>
     </header>
-    {% for order, ingredients in orders %}
+    {% for order in orders %}
     <ol>
         <li>
-            {{order.pizza}}
-            {{order.ingredients}}
-            <input type="checkbox" name="Checkbox" value="yes">
+            <p>{{order.quantity}}x {{order.name}} </p>
         </li>
     </ol>
     {% endfor %}

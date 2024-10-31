@@ -83,7 +83,7 @@ def mario_orders():
 
 @app.route('/luigi/orders')
 def luigi_orders():
-    return render_template('luigi_orders.html')
+    return render_template('luigi_orders.html',orders=orders)
 
 if __name__ == '__main__':
     app.run(debug=True)
