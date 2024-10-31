@@ -24,7 +24,6 @@ def menu_page():
     if request.method == 'POST':
         # Clear the orders for a new session
         global orders
-        orders = []  # Reset orders for a new submission
 
         # Process selected pizzas and their quantities
         for pizza in menu:
