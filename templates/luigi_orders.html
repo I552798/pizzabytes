@@ -10,11 +10,11 @@
         <h1>Orders</h1>
     </header>
     {% for order in orders %}
-    <ol>
+    <ul>
         <li>
             <p>{{order.quantity}}x {{order.name}} </p>
         </li>
-    </ol>
+    </ul>
     {% endfor %}
 </body>
 </html>
