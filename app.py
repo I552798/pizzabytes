@@ -60,7 +60,7 @@ def order_status():
     return render_template('order_status.html')
 
 @app.route('/mario/orders', methods=['GET', 'POST'])
-def mario_orders():
+def mario_orders_page():
     if request.method == 'POST':
         table = request.form.get('table')
         pepperoni = int(request.form.get('pepperoni', 0))
@@ -82,8 +82,12 @@ def mario_orders():
     return render_template('mario_orders.html')
 
 @app.route('/luigi/orders')
-def luigi_orders():
-    return render_template('luigi_orders.html')
+def luigi_orders_page():
+    luigi_orders={
+        "client": orders,
+        "mario": mario_orders
+    }
+    return render_template('luigi_orders.html',luigi_orders=luigi_orders)
 
 if __name__ == '__main__':
     app.run(debug=True)
