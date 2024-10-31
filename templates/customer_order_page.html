@@ -1,3 +1,4 @@
+<!-- menu.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,37 +12,20 @@
         <a href="/order/overview">Order overview</a>
         <a href="/order/status">Order status</a>
     </header>
-    <img src="static/images/logo-removebg-preview.png" alt="logo">
     <h1>Menu</h1>
-
-    <img src="static/images/Pepperoni-Margherita-Pizza-removebg-preview.png" alt="pizza1">
-    <h4>Pepperoni</h4>
-    <p>Hand-tossed dough, house-made tomato sauce, mozzarella cheese, and savory pepperoni.</p>
-    <h3>€13.10</h3>
-    <input type="text" id="counter" name="counter" placeholder="Enter the quantity...">
-    <br>
-
-    <img src="static/images/marga1-removebg-preview.png" alt="pizza2">
-    <h4>Margherita</h4>
-    <p>Hand-tossed dough, tomato sauce, fresh mozzarella, vine-ripened tomatoes, fresh basil, and extra virgin olive oil.</p>
-    <h3>€12.95</h3>
-    <input type="text" id="counter" name="counter" placeholder="Enter the quantity...">
-    <br>
-
-    <img src="static/images/Prosciutto-Arugula-Pizza-recipe-photo-0198-removebg-preview.png" alt="pizza3">
-    <h4>Prosciutto</h4>
-    <p>Hand-tossed dough, tomato sauce, fresh mozzarella, thinly sliced prosciutto, arugula, shaved Parmesan, and extra virgin olive oil.</p>
-    <h3>€16.70</h3>
-    <input type="text" id="counter" name="counter" placeholder="Enter the quantity...">
-    <br>
-
-    <img src="static/images/patrona-supreme.webp" alt="pizza4">
-    <h4>Patron</h4>
-    <p>Hand-stretched dough, tomato sauce, mozzarella cheese, pepperoni, Italian sausage, green bell peppers, red onions, mushrooms, and black olives.</p>
-    <h3>€23.99</h3>
-    <input type="text" id="counter" name="counter" placeholder="Enter the quantity...">
-    <br>
-
-    <a href="/order/overview">Next</a>
+    <form action="/menu" method="post">
+        {% for pizza in menu %}
+            <div>
+                <img src="static/images/{{ pizza.name | lower }}.png" alt="{{ pizza.name }}">
+                <h4>{{ pizza.name }}</h4>
+                <p>Price: &euro;{{ pizza.price }}</p>
+                <label for="quantity_{{ pizza.name }}">Quantity:</label>
+                <input type="text" id="quantity_{{ pizza.name }}" name="quantity" placeholder="Enter the quantity...">
+                <input type="hidden" name="pizza_name" value="{{ pizza.name }}">
+            </div>
+            <br>
+        {% endfor %}
+        <button type="submit">Next</button>
+    </form>
 </body>
 </html>
