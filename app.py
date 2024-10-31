@@ -1,5 +1,4 @@
-from flask import Flask, redirect, render_template, url_for
-app=Flask(__name__)
+
 
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -36,16 +35,6 @@ def order_overview():
 def order_status():
     return render_template('order_status.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-
-# @app.route('/')
-# def menu_page():
-#     return render_template('customer_order_page.html', menu=menu)
-
-
 @app.route('/payment')
 def payment():
     return render_template('payment.html')
@@ -63,7 +52,14 @@ def mario_orders():
 def luigi_orders():
     return render_template('luigi_orders.html')
 
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
-if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+
+
+
+
+
+
+
