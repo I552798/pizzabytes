@@ -31,21 +31,36 @@ def order_overview():
     total = sum(order['price'] * order['quantity'] for order in orders)
     return render_template('order_overview.html', orders=orders, total=total)
 
-@app.route('/order/status')
-def order_status():
-    return render_template('order_status.html')
 
 @app.route('/payment')
 def payment():
     return render_template('payment.html')
 
 
-@app.route('/mario/order/overview')
-def mario_order_overview():
-    return render_template('mario_order_overview.html')
+@app.route('/order/status')
+def order_status():
+    return render_template('order_status.html')
 
-@app.route('/mario/orders')
+@app.route('/mario/orders', methods=['GET', 'POST'])
 def mario_orders():
+    if request.method == 'POST':
+        table = request.form.get('table')
+        pepperoni = int(request.form.get('pepperoni', 0))
+        margherita = int(request.form.get('margherita', 0))
+        prosciutto = int(request.form.get('prosciutto', 0))
+        patron = int(request.form.get('patron', 0))
+
+        # Add orders for the selected table
+        if pepperoni > 0:
+            orders.append({"table": table, "name": "Pepperoni", "price": 13.10, "quantity": pepperoni})
+        if margherita > 0:
+            orders.append({"table": table, "name": "Margherita", "price": 12.95, "quantity": margherita})
+        if prosciutto > 0:
+            orders.append({"table": table, "name": "Prosciutto", "price": 16.70, "quantity": prosciutto})
+        if patron > 0:
+            orders.append({"table": table, "name": "Patron", "price": 23.99, "quantity": patron})
+
+        return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
 
 @app.route('/luigi/orders')
