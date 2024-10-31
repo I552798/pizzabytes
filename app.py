@@ -14,6 +14,11 @@ menu = [
 # Orders list to store current orders
 orders = []
 
+@app.route('/')
+def home():
+    # Redirect to the menu page
+    return redirect(url_for('menu_page'))
+
 @app.route('/menu', methods=['GET', 'POST'])
 def menu_page():
     if request.method == 'POST':
