@@ -29,7 +29,8 @@ def menu_page():
 
 @app.route('/order/overview')
 def order_overview():
-    return render_template('order_overview.html', orders=orders)
+    total = sum(order['price'] * order['quantity'] for order in orders)
+    return render_template('order_overview.html', orders=orders, total=total)
 
 @app.route('/order/status')
 def order_status():
