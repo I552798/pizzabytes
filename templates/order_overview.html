@@ -9,9 +9,9 @@
 </head>
 <body>
     <header>
-        <a href="/menu">Menu</a>
-        <a href="/order/overview">Order overview</a>
-        <a href="/order/status">Order status</a>
+        <a href="/menu"><button>Menu</button></a>
+        <a href="/order/overview"><button>Order overview</button></a>
+        <a href="/order/status"><button>Order status</button></a>
     </header>
     <div class="container">
         <img src="static/images/logo-removebg-preview.png" alt="logo">
@@ -28,8 +28,8 @@
             <h2>Total: &euro;{{ '%.2f' % total }}</h2>
         </div>
         <div class="buttons">
-            <a href="/menu" class="button">Back</a>
-            <a href="/order/status" class="button">Checkout</a>
+            <a href="/menu" class="button"><button>Back</button></a>
+            <a href="/payment" class="button"><button>Checkout</button></a>
         </div>
     </div>
 </body>
