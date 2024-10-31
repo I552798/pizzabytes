@@ -11,18 +11,23 @@ tables = {
 }
 
 orders = []
+order_index = 0
 
+# Index page
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Fornt dashboard (Mario's dashboard)
 @app.route('/dashboard_front')
 def front_dashboard():
     return render_template('dashboard_front.html', tables=tables, orders=orders)
 
+# Kitchen dashboard (Luigi's dashboard)
 @app.route('/dashboard_kitchen')
 def kitchen_dashboard():
     return render_template('dashboard_kitchen.html', orders=orders)
+
 
 @app.route('/new_order', methods=['GET', 'POST'])
 def new_order():
@@ -41,6 +46,7 @@ def new_order():
 
     return render_template('new_order.html', tables=tables)
 
+
 @app.route('/update_table/<int:table_number>')
 def update_table(table_number):
     tables[table_number] = "Free"
@@ -53,6 +59,7 @@ def update_table(table_number):
     
     orders = updated_orders
     return redirect(url_for('front_dashboard'))
+
 
 @app.route('/mark_pizza_done/<int:order_index>')
 def mark_pizza_done(order_index):
@@ -70,6 +77,20 @@ def mark_pizza_done(order_index):
         tables[table_number] = "Free"
 
     return redirect(url_for('kitchen_dashboard'))
+
+
+@app.route('/mark_order_completed', methods=['POST'])
+def mark_next_order_completed():
+    global order_index
+
+    data = request.get_json() 
+    if order_index < len(orders):
+        if data and "message" in data:
+            orders[order_index]["status"] = "Completed"
+            order_index += 1
+    if order_index < len(orders):  # Ensure the order_index is within bounds
+        order_index = 0
+
 
 if __name__ == '__main__':
     app.run(debug=True)
