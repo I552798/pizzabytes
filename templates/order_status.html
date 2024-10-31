@@ -1,27 +1,25 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Order status</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status</title>
 </head>
 <body>
     <div>
         <a href="/menu"><button>Menu</button></a>
-        <a href="/order/overview"><button>Order overview</button></a>
-        <a href="/order/status"><button>Order status</button></a>
+        <a href="/order/overview"><button>Order Overview</button></a>
+        <a href="/order/status"><button>Order Status</button></a>
     </div>
 
-    <img src="static/images/logo-removebg-preview.png">
+    <img src="static/images/logo-removebg-preview.png" alt="logo">
+    <h2>Order Status</h2>
 
-    <h2>Order status</h2>
-
-    </div>
     {% for order in orders %}
-    <div>
-        {{ order.quantity }}x {{ order.name }}
-        {% if order.status == 'Preparing' %}<img src="/static/images/clock-removebg-preview.png">{% else %}<img src="/static/images/check-removebg-preview.png">{% endif %} {{ order.status }}
-    </div>
+        <div>
+            {{ order.quantity }}x {{ order.name }} - {{ order.status }}
+        </div>
     {% endfor %}
-    <br>
-
 
     <div>
         <a href="/payment"><button>Back</button></a>

@@ -23,25 +23,25 @@ def home():
 @app.route('/menu', methods=['GET', 'POST'])
 def menu_page():
     if request.method == 'POST':
-        # Clear the orders for a new session
         global orders
+        orders = []  # Clear previous orders for a fresh session
 
         # Process selected pizzas and their quantities
         for pizza in menu:
             pizza_name = pizza['name']
             quantity = request.form.get(f'quantity_{pizza_name}')  # Get the quantity for this pizza
             selected = request.form.getlist('selected_pizza')  # Get list of selected pizzas
-            
+
             if pizza_name in selected and quantity.isdigit() and int(quantity) > 0:
-                # Add selected pizza and quantity to the order
+                # Add selected pizza, quantity, and default status to the order
                 orders.append({
                     "name": pizza_name,
                     "price": pizza['price'],
-                    "quantity": int(quantity)
+                    "quantity": int(quantity),
+                    "status": "Preparing"  # Default status for new orders
                 })
         
         return redirect(url_for('order_overview'))
-
     return render_template('customer_order_page.html', menu=menu)
 
 @app.route('/order/overview')
