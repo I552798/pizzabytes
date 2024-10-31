@@ -44,21 +44,11 @@ if __name__ == '__main__':
 # def menu_page():
 #     return render_template('customer_order_page.html', menu=menu)
 
-@app.route('/menu', methods=['GET', 'POST'])
-def order_customer():
-    return render_template('customer_order_page.html', pizzas=menu)
-
-@app.route('/order/overview')
-def order_overview():
-    return render_template('order_overview.html')
 
 @app.route('/payment')
 def payment():
     return render_template('payment.html')
 
-@app.route('/order/status')
-def order_status():
-    return render_template('order_status.html')
 
 @app.route('/mario/order/overview')
 def mario_order_overview():

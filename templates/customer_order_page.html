@@ -18,6 +18,7 @@
             <div>
                 <img src="static/images/{{ pizza.name | lower }}.png" alt="{{ pizza.name }}">
                 <h4>{{ pizza.name }}</h4>
+                <p>Description: {{ pizza.description }}</p>
                 <p>Price: &euro;{{ pizza.price }}</p>
                 <label for="quantity_{{ pizza.name }}">Quantity:</label>
                 <input type="text" id="quantity_{{ pizza.name }}" name="quantity" placeholder="Enter the quantity...">
