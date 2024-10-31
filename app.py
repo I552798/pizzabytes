@@ -13,6 +13,7 @@ menu = [
 ]
 # Orders list to store current orders
 orders = []
+mario_orders = []
 
 @app.route('/')
 def home():
@@ -83,7 +84,7 @@ def mario_orders():
 
 @app.route('/luigi/orders')
 def luigi_orders():
-    return render_template('luigi_orders.html',orders=orders)
+    return render_template('luigi_orders.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
