@@ -9,12 +9,12 @@
 </head>
 <body>
     <header>
-        <a href="/menu"><button>Menu</button></a>
-        <a href="/order/overview"><button>Order overview</button></a>
-        <a href="/order/status"><button>Order status</button></a>
+        <a href="{{ url_for('menu_page', table=table) }}"><button>Menu</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button>Order overview</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
     </header>
     <div class="container">
-        <img src="static/images/logo-removebg-preview.png" alt="logo">
+        <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
         <h1>Order Overview</h1>
         <div class="order-list">
             {% for order in orders %}
@@ -28,8 +28,8 @@
             <h2>Total: &euro;{{ '%.2f' % total }}</h2>
         </div>
         <div class="buttons">
-            <a href="/menu" class="button"><button>Back</button></a>
-            <a href="/payment" class="button"><button>Checkout</button></a>
+            <a href="{{ url_for('menu_page', table=table) }}"><button>Back</button></a>
+            <a href="{{ url_for('payment', table=table) }}" class="button"><button>Checkout</button></a>
         </div>
     </div>
 </body>

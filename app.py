@@ -43,21 +43,21 @@ def menu_page(table):
                     "status": "Preparing"  # Default status for new orders
                 })
         
-        return redirect(url_for('order_overview'))
+        return redirect(url_for('order_overview', table=table))
     return render_template('customer_order_page.html', menu=menu, table=table)
 
-@app.route('/order/overview')
-def order_overview():
+@app.route('/order/overview/<int:table>')
+def order_overview(table):
     total = sum(order['price'] * order['quantity'] for order in orders)
-    return render_template('order_overview.html', orders=orders, total=total)
+    return render_template('order_overview.html', orders=orders, total=total, table=table)
 
-@app.route('/payment')
-def payment():
-    return render_template('payment.html')
+@app.route('/payment/<int:table>')
+def payment(table):
+    return render_template('payment.html', table=table)
 
-@app.route('/order/status')
-def order_status():
-    return render_template('order_status.html', orders=orders)
+@app.route('/order/status/<int:table>')
+def order_status(table):
+    return render_template('order_status.html', orders=orders, table=table)
 
 @app.route('/mario/orders', methods=['GET', 'POST'])
 def mario_orders_page():

@@ -3,13 +3,13 @@
     <title>Choose Payment Method</title>
 </head>
 <body>
-    <div>
-        <a href="/menu"><button>Menu</button></a>
-        <a href="/order/overview"><button>Order overview</button></a>
-        <a href="/order/status"><button>Order status</button></a>
-    </div>
+    <header>
+        <a href="{{ url_for('menu_page', table=table) }}"><button>Menu</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button>Order overview</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
+    </header>
 
-    <img src="static/images/logo-removebg-preview.png">
+    <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}">
 
     <h2>Choose payment method</h2>
 
@@ -19,8 +19,8 @@
     </div>
 
     <div>
-        <a href="/order/overview"><button>Back</button></a>
-        <a href="/order/status"><button>Pay</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button>Back</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button>Pay</button></a>
     </div>
 </body>
 </html>

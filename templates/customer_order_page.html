@@ -7,13 +7,13 @@
 </head>
 <body>
     <header>
-        <a href="/menu"><button>Menu</button></a>
-        <a href="/order/overview"><button>Order overview</button></a>
-        <a href="/order/status"><button>Order status</button></a>
+        <a href="{{ url_for('menu_page', table=table) }}"><button>Menu</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button>Order overview</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
     </header>
     <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
     <h1>Menu - Table {{ table_id }}</h1>
-    <form action="" method="post">
+    <form action="{{ url_for('menu_page', table=table) }}" method="post">
         {% for pizza in menu %}
             <div>
                 <img src="{{ url_for('static', filename='images/' ~ pizza.name | lower ~ '.png') }}" alt="{{ pizza.name }}" style="width: 150px; height: auto;">
@@ -29,7 +29,7 @@
             </div>
             <br>
         {% endfor %}
-        <button type="submit">Place Order for Table {{ table_id }}</button>
+        <button type="submit">Place Order for Table {{ table }}</button>
     </form>
 </body>
 </html>

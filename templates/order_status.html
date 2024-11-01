@@ -6,13 +6,13 @@
     <title>Order Status</title>
 </head>
 <body>
-    <div>
-        <a href="/menu"><button>Menu</button></a>
-        <a href="/order/overview"><button>Order Overview</button></a>
-        <a href="/order/status"><button>Order Status</button></a>
-    </div>
+    <header>
+        <a href="{{ url_for('menu_page', table=table) }}"><button>Menu</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button>Order overview</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
+    </header>
 
-    <img src="static/images/logo-removebg-preview.png" alt="logo">
+    <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
     <h2>Order Status</h2>
 
     {% for order in orders %}
@@ -21,8 +21,5 @@
         </div>
     {% endfor %}
 
-    <div>
-        <a href="/payment"><button>Back</button></a>
-    </div>
 </body>
 </html>
