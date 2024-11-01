@@ -15,6 +15,9 @@
             {% if order.quantity > 0 %}
                 <p>{{order.quantity}}x {{order.name}} </p>
                 <p>{{order.description}}</p>
+                <form action="{{ url_for('delete_order', index=loop.index0) }}" method="post" style="display:inline;">
+                    <button type="submit">Remove</button>
+                </form>
                 {% else %}
                 <p>No orders</p>
             {% endif %}
