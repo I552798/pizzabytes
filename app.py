@@ -16,11 +16,6 @@ menu = [
 orders = []
 order_index = 0
 
-@app.route('/')
-def home():
-    # Redirect to the menu page
-    return redirect(url_for('menu_page'))
-
 @app.route('/menu/<int:table>', methods=['GET', 'POST'])
 def menu_page(table):
     if request.method == 'POST':
@@ -30,7 +25,7 @@ def menu_page(table):
         for pizza in menu:
             pizza_name = pizza['name']
             pizza_price = pizza['price']
-            ingredients=pizza['description']
+            description=pizza['description']
             quantity = request.form.get(f'quantity_{pizza_name}')  # Get the quantity for this pizza
             selected = request.form.getlist('selected_pizza')  # Get list of selected pizzas
 
@@ -42,7 +37,7 @@ def menu_page(table):
                     "price": pizza_price,
                     "quantity": int(quantity),
                     "status": "Preparing",  # Default status for new orders
-                    "description": ingredients
+                    "description": description
                 })
         
         return redirect(url_for('order_overview', table=table))
@@ -116,6 +111,13 @@ def mark_next_order_completed():
 
     if order_index >= len(orders):  # Ensure the order_index is within bounds
         order_index = 0
+
+@app.route('/delete_order/<int:index>', methods=['POST'])
+def delete_order(index):
+    # Ensure the index is valid and remove the order
+    if 0 <= index < len(orders):
+        orders.pop(index)
+    return redirect(url_for('luigi_orders_page'))
 
 if __name__ == '__main__':
     app.run(debug=True)
