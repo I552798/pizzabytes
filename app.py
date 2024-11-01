@@ -16,6 +16,10 @@ menu = [
 orders = []
 order_index = 0
 
+@app.route('/')
+def show_menu():
+    return render_template('static_menu.html', menu=menu)
+
 @app.route('/menu/<int:table>', methods=['GET', 'POST'])
 def menu_page(table):
     if request.method == 'POST':
