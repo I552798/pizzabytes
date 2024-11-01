@@ -81,6 +81,9 @@ def mario_orders_page():
         return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
 
+@app.route('/mario/orders/overview')
+def mario_orders_overview():
+    return render_template('mario_overview.html')
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
