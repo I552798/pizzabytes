@@ -12,7 +12,7 @@
         <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
     </header>
     <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
-    <h1>Menu - Table {{ table_id }}</h1>
+    <h1>Menu - Table {{ table }}</h1>
     <form action="{{ url_for('menu_page', table=table) }}" method="post">
         {% for pizza in menu %}
             <div>

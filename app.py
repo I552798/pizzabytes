@@ -50,8 +50,18 @@ def menu_page(table):
 
 @app.route('/order/overview/<int:table>')
 def order_overview(table):
-    total = sum(order['price'] * order['quantity'] for order in orders)
-    return render_template('order_overview.html', orders=orders, total=total, table=table)
+    # Step 1: Create a new list of orders that match the specified table
+    filtered_orders = []
+    for order in orders:
+        if order['table'] == table:
+            filtered_orders.append(order)  # Add to the new list if it matches
+
+    # Step 2: Calculate the total cost of the filtered orders
+    total = sum(order['price'] * order['quantity'] for order in filtered_orders)
+
+    # Step 3: Render the template with only the filtered orders
+    return render_template('order_overview.html', orders=filtered_orders, total=total, table=table)
+
 
 @app.route('/payment/<int:table>')
 def payment(table):
