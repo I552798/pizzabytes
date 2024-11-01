@@ -63,23 +63,20 @@ def order_status():
 def mario_orders_page():
     if request.method == 'POST':
         table = request.form.get('table')
-        pepperoni = int(request.form.get('pepperoni', 0))
-        margherita = int(request.form.get('margherita', 0))
-        prosciutto = int(request.form.get('prosciutto', 0))
-        patron = int(request.form.get('patron', 0))
-
-        # Add orders for the selected table with default status
-        if pepperoni > 0:
-            orders.append({"table": table, "name": "Pepperoni", "price": 13.10, "quantity": pepperoni, "status": "Preparing"})
-        if margherita > 0:
-            orders.append({"table": table, "name": "Margherita", "price": 12.95, "quantity": margherita, "status": "Preparing"})
-        if prosciutto > 0:
-            orders.append({"table": table, "name": "Prosciutto", "price": 16.70, "quantity": prosciutto, "status": "Preparing"})
-        if patron > 0:
-            orders.append({"table": table, "name": "Patron", "price": 23.99, "quantity": patron, "status": "Preparing"})
-
+        for pizza in menu:
+            pizza_name = pizza["name"].lower()
+            quantity = request.form.get(pizza_name)
+            
+            if quantity and quantity.isdigit() and int(quantity) > 0:
+                orders.append({
+                    "table": table,
+                    "name": pizza["name"],
+                    "price": pizza["price"],
+                    "quantity": int(quantity),
+                })
         return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
+
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
