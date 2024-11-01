@@ -73,6 +73,7 @@ def mario_orders_page():
                     "name": pizza["name"],
                     "price": pizza["price"],
                     "quantity": int(quantity),
+                    "status": "Preparing"
                 })
         return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
