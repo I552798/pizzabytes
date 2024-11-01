@@ -30,6 +30,7 @@ def menu_page(table):
         for pizza in menu:
             pizza_name = pizza['name']
             pizza_price = pizza['price']
+            ingredients=pizza['description']
             quantity = request.form.get(f'quantity_{pizza_name}')  # Get the quantity for this pizza
             selected = request.form.getlist('selected_pizza')  # Get list of selected pizzas
 
@@ -40,7 +41,8 @@ def menu_page(table):
                     "name": pizza_name,
                     "price": pizza_price,
                     "quantity": int(quantity),
-                    "status": "Preparing"  # Default status for new orders
+                    "status": "Preparing",  # Default status for new orders
+                    "description": ingredients
                 })
         
         return redirect(url_for('order_overview'))
@@ -73,7 +75,8 @@ def mario_orders_page():
                     "name": pizza["name"],
                     "price": pizza["price"],
                     "quantity": int(quantity),
-                    "status": "Preparing"
+                    "status": "Preparing",
+                    "description": pizza['description']
                 })
         return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
