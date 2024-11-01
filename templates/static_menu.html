@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <header>
+        <h1>Our Menu</h1>
+    </header>
+    <section>
+        {% for pizza in menu %}
+            <div>
+                <img src="{{ url_for('static', filename='images/' ~ pizza.name | lower ~ '.png') }}" alt="{{ pizza.name }}" style="width: 150px; height: auto;">
+                <h4>{{ pizza.name }}</h4>
+                <p>{{ pizza.description }}</p>
+                <p>Price: &euro;{{ pizza.price }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+    </section>
+</body>
+</html>
