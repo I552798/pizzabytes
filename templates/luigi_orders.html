@@ -14,6 +14,7 @@
         <li>
             {% if order.quantity > 0 %}
                 <p>{{order.quantity}}x {{order.name}} </p>
+                <p>{{order.description}}</p>
                 {% else %}
                 <p>No orders</p>
             {% endif %}
