@@ -13,28 +13,32 @@
     <table>
         <thead>Preparing</thead>
         {% for order in orders %}
-        <tbody>
-            <tr>
-                <th>{{order.quantity}}x {{order.name}}</th>
-                <td>{{order.timer}}</td>
-                <td>{{order.table}}</td>
-            </tr>
-        </tbody>
+            {% if order.status == "Preparing" %}
+                <tbody>
+                    <tr>
+                        <th>{{order.quantity}}x {{order.name}}</th>
+                        <td>{{order.timer}}</td>
+                        <td>{{order.table}}</td>
+                    </tr>
+                </tbody>
+            {% endif %}
         {% endfor %}
     </table>
     <table>
         <thead>Ready</thead>
         <tbody>
             {% for order in orders %}
-            <tr>
-                <th>{{order.quantity}}x {{order.name}}</th>
-                <td>Table: {{order.table}}</td>
-                <td>
-                    <form action="{{ url_for('delete_order', index=loop.index0) }}?from_page=mario" method="post" style="display:inline;">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
+                {% if order.status == "Ready" %}
+                    <tr>
+                        <th>{{order.quantity}}x {{order.name}}</th>
+                        <td>Table: {{order.table}}</td>
+                        <td>
+                            <form action="{{ url_for('delete_order', index=loop.index0) }}?from_page=mario" method="post" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>
