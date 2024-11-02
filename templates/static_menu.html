@@ -6,9 +6,8 @@
     <title>Menu</title>
 </head>
 <body>
-    <header>
-        <h1>Our Menu</h1>
-    </header>
+        <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
+        <h1>Menu</h1>
     <section>
         {% for pizza in menu %}
             <div>
