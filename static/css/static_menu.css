@@ -1,39 +1,40 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;700&display=swap');
+
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f5f5b5;
+    text-align: center;
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    font-size: 3rem;
-    margin: 20px 0;
+    font-size: 4rem;
+    font-family: 'Lobster', cursive;
+    margin: 10px 0;
     color: #ffffff;
-    background-color: #008000; 
-    padding: 10px;
-    border-radius: 8px;
+    background-color: green;
 }
 
 img[alt="logo"] {
-    width: 400px;
-    margin: 20px 0;
+    width: 200px;
+    margin: 10px 0;
 }
 
-
-/* Section styling */
 section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     display: flex;
-    justify-content: space-between; /* Ensures even distribution across the row */
-    flex-wrap: nowrap; /* Prevents wrapping to the next line */
+    justify-content: space-between;
+    flex-wrap: nowrap; 
     gap: 20px;
 }
 
 
 section div {
-    background-color: #C43910;
+    background: linear-gradient(to bottom, #B63F1A, #FF5B5B);
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 250px;
@@ -43,20 +44,22 @@ section div {
 
 section div img {
     width: 150px;
-    height: auto;
+    height: 150px;
+    object-fit: cover;
     border-radius: 50%;
     margin-bottom: 10px;
 }
 
+
 section div h4 {
     font-size: 1.5rem;
-    color: white;
+    color: #ffffff;
     margin-bottom: 10px;
 }
 
 section div p {
     font-size: 1rem;
-    color: white;
+    color: #ffffff;
     margin-bottom: 10px;
 }
 
