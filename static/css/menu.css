@@ -1,0 +1,144 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5b5;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    text-align: left;
+    padding: 15px;
+}
+
+header a button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+} 
+header a button.menu {
+    background-color: green;
+    color: white;
+}
+
+header a button.order-overview {
+    background-color: white;
+    color: black;
+}
+
+header a button.order-status {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+header a button:hover {
+    background-color: #32cd32;
+}
+
+h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 4rem;
+    margin: 20px 0;
+    color: #ffffff;
+    background-color: green;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+img[alt="logo"] {
+    width: 200px;
+    margin: 20px 0;
+}
+
+form {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: nowrap; 
+    justify-content: space-between; 
+    gap: 10px;
+}
+
+form div {
+    background: linear-gradient(to bottom, #B63F1A, #ff8c66);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 23%; 
+    min-height: 450px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0; 
+}
+
+
+form div img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+form div h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+form div p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 15px; 
+}
+
+form div label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+    display: block;
+    margin: 10px 0 5px; 
+}
+
+form div input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+form div input[type="number"], 
+form div input[type="text"] {
+    width: 80%; 
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 1rem;
+}
+
+button[type="submit"] {
+    background-color: #008000;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    margin-bottom: 5%;
+    font-size: 1.25rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #32cd32;
+}
