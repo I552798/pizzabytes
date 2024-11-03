@@ -5,31 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Overview</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
 </head>
 <body>
     <header>
-        <a href="{{ url_for('menu_page', table=table) }}"><button>Menu</button></a>
-        <a href="{{ url_for('order_overview', table=table) }}"><button>Order overview</button></a>
-        <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
+        <a href="{{ url_for('menu_page', table=table) }}"><button class="menu">Menu</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button class="order-overview">Order overview</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button class="order-status">Order status</button></a>
     </header>
-    <div class="container">
+    <div>
         <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
         <h1>Order Overview</h1>
-        <div class="order-list">
+        <div>
             {% for order in orders %}
-                <div class="order-item">
+                <div>
                     <span>{{ order.quantity }}x {{ order.name }}</span>
                     <span>&euro;{{ '%.2f' % (order.price * order.quantity) }}</span>
                 </div>
             {% endfor %}
         </div>
-        <div class="order-total">
-            <h2>Total: &euro;{{ '%.2f' % total }}</h2>
+        <div>
+            <h2 class="font">Total: &euro;{{ '%.2f' % total }}</h2>
         </div>
-        <div class="buttons">
-            <a href="{{ url_for('menu_page', table=table) }}"><button>Back</button></a>
-            <a href="{{ url_for('payment', table=table) }}" class="button"><button>Checkout</button></a>
+        <div class="button-container">
+            <a href="{{ url_for('menu_page', table=table) }}"><button class="redButton">Back</button></a>
+            <a href="{{ url_for('payment', table=table) }}"><button class="greenButton">Checkout</button></a>
         </div>
     </div>
 </body>

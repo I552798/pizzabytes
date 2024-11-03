@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
     <title>Order Status</title>
 </head>
 <body>
     <header>
-        <a href="{{ url_for('menu_page', table=table) }}"><button>Menu</button></a>
-        <a href="{{ url_for('order_overview', table=table) }}"><button>Order overview</button></a>
-        <a href="{{ url_for('order_status', table=table) }}"><button>Order status</button></a>
+        <a href="{{ url_for('menu_page', table=table) }}"><button class="menu">Menu</button></a>
+        <a href="{{ url_for('order_overview', table=table) }}"><button class="order-overview">Order overview</button></a>
+        <a href="{{ url_for('order_status', table=table) }}"><button class="order-status">Order status</button></a>
     </header>
 
     <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
-    <h2>Order Status</h2>
+    <h1>Order Status</h1>
 
     {% for order in orders %}
         <div>
-            {{ order.quantity }}x {{ order.name }} - {{ order.status }}
+            <p class="font">{{ order.quantity }}x {{ order.name }} - {{ order.status }}</p>
         </div>
     {% endfor %}
 
