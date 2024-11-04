@@ -118,7 +118,7 @@ def mark_next_order_completed():
 
 @app.route('/delete_order/<int:index>', methods=['POST'])
 def delete_order(index):
-    # Ensure the index is valid and remove the order
+    # Ensure the index is valid and corresponds to a "Completed" order
     if 0 <= index < len(orders):
         orders.pop(index)
     
@@ -131,6 +131,7 @@ def delete_order(index):
     
     # Default redirect if no parameter is found
     return redirect(url_for('luigi_orders_page'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
