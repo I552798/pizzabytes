@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Mario orders</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mario.css') }}">
+  <title>Mario orders</title>
 </head>
 <body>
-
-    <a href="mario/order/overview" class="button">Overview</a>
-    <label for="table">Select Table:</label>
-    <select name="table" id="table">
-      <option value="table1">Table 1</option>
-      <option value="table2">Table 2</option>
-      <option value="table3">Table 3</option>
-      <option value="table4">Table 4</option>
-    </select>
+  <div class="button-container">
+    <a href="{{ url_for('mario_orders_overview') }}" class="redButton">Overview</a>
+  </div>
+  <header>
+    <h1>Order</h1>
+</header>
+  <form action="{{ url_for('mario_orders_page') }}" method="post">
+    <div>
+      <label for="table">Select Table:</label>
+      <select name="table" id="table">
+        <option value="1">Table 1</option>
+        <option value="2">Table 2</option>
+        <option value="3">Table 3</option>
+        <option value="4">Table 4</option>
+      </select>
+    </div>
 
     <br><br>
-    
-    <form action="#" method="post">
+
+    <div class="input-group">
+      <div>
         <label for="pepperoni">Pepperoni:</label>
         <input type="number" name="pepperoni" id="pepperoni" min="0" placeholder="Enter quantity">
-    
-        <br><br>
-    
+      </div>
+
+      <div>
         <label for="margherita">Margherita:</label>
         <input type="number" name="margherita" id="margherita" min="0" placeholder="Enter quantity">
-    
-        <br><br>
-    
+      </div>
+
+      <div>
         <label for="prosciutto">Prosciutto:</label>
         <input type="number" name="prosciutto" id="prosciutto" min="0" placeholder="Enter quantity">
-    
-        <br><br>
-    
+      </div>
+
+      <div>
         <label for="patron">Patron:</label>
         <input type="number" name="patron" id="patron" min="0" placeholder="Enter quantity">
-    
-        <br><br>
-    
-        <input type="submit" value="Submit Order">
-      </form>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="greenButton">Submit Order</button>
+    </div>
+  </form>
 
 </body>
 </html>

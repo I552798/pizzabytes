@@ -87,12 +87,12 @@ def mario_orders_page():
                     "status": "Preparing",
                     "description": pizza['description']
                 })
-        return redirect(url_for('order_overview'))
+        return redirect(url_for('mario_orders_overview'))
     return render_template('mario_orders.html')
 
 @app.route('/mario/orders/overview')
 def mario_orders_overview():
-    return render_template('mario_overview.html')
+    return render_template('mario_overview.html', orders=orders)
 
 @app.route('/luigi/orders')
 def luigi_orders_page():

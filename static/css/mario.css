@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5b5;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+}
+
+.redButton {
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 17px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0.5px solid #000000;
+    font-family: 'Lobster', cursive;
+}
+
+.redButton:hover {
+    background-color: #cc0000;
+}
+
+.select-table-container {
+    background-color: #ff0000; /* Red background */
+    color: #ffffff; /* White text */
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.input-group div {
+    margin-bottom: 20px;
+}
+
+.greenButton {
+    background-color: #008000;
+    color: #ffffff;
+    padding: 15px 30px;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.greenButton:hover {
+    background-color: #006400;
+}
+
+input[type="number"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the content in the main section */
+    margin-top: 20px; /* Add margin for better spacing */
+}
+
+header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: green;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+}
+
+header h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 3.5rem;
+    color: white;
+    margin: 0;
+}
+
