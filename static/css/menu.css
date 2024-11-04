@@ -130,20 +130,27 @@ form div input[type="text"] {
     font-size: 1rem;
 }
 
-button[type="submit"] {
+.order-button {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.order-button .submit-button {
     background-color: #008000;
     color: #ffffff;
-    border: none;
-    padding: 15px 30px;
-    margin-bottom: 5%;
+    padding: 10px 20px;
     font-size: 1.25rem;
     font-family: 'Poppins', sans-serif;
     border-radius: 5px;
+    text-decoration: none; 
+    display: inline-block;
 }
 
-button[type="submit"]:hover {
+.order-button .submit-button:hover {
     background-color: #32cd32;
 }
+
 
 .button-container {
     display: flex;
