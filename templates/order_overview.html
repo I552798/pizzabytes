@@ -13,17 +13,20 @@
         <a href="{{ url_for('order_overview', table=table) }}"><button class="order-overview">Order overview</button></a>
         <a href="{{ url_for('order_status', table=table) }}"><button class="order-status">Order status</button></a>
     </header>
-    <div>
+    <div class="font">
         <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
         <h1>Order Overview</h1>
-        <div>
+        <div class="list">
             {% for order in orders %}
-                <div>
+                <div class="item">
                     <span>{{ order.quantity }}x {{ order.name }}</span>
                     <span>&euro;{{ '%.2f' % (order.price * order.quantity) }}</span>
                 </div>
             {% endfor %}
         </div>
+
+        <hr class="line">
+
         <div>
             <h2 class="font">Total: &euro;{{ '%.2f' % total }}</h2>
         </div>

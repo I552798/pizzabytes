@@ -16,11 +16,13 @@
     <img src="{{ url_for('static', filename='images/logo-removebg-preview.png') }}" alt="logo">
     <h1>Order Status</h1>
 
-    {% for order in orders %}
-        <div>
-            <p class="font">{{ order.quantity }}x {{ order.name }} - {{ order.status }}</p>
-        </div>
+    <div class="list">
+        {% for order in orders %}
+            <div class="item">
+                <p class="font">{{ order.quantity }}x {{ order.name }}</p>
+                <p class="font"> {{ order.status }}</p>
+            </div>
     {% endfor %}
-
+</div>
 </body>
 </html>
