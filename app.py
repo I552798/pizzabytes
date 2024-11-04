@@ -1,7 +1,6 @@
 
 
 from flask import Flask, render_template, request, redirect, url_for
-import copy
 
 app = Flask(__name__)
 
@@ -88,18 +87,16 @@ def mario_orders_page():
                     "status": "Preparing",
                     "description": pizza['description']
                 })
-                luigi=list(orders)
         return redirect(url_for('order_overview'))
     return render_template('mario_orders.html')
 
 @app.route('/mario/orders/overview')
 def mario_orders_overview():
-    return render_template('mario_overview.html',orders=orders)
+    return render_template('mario_overview.html')
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
-    luigi_orders=orders
-    return render_template('luigi_orders.html', luigi_orders=luigi_orders)
+    return render_template('luigi_orders.html', orders=orders)
 
 @app.route('/mark_order_completed', methods=['POST'])
 def mark_next_order_completed():
@@ -121,18 +118,10 @@ def mark_next_order_completed():
 
 @app.route('/delete_order/<int:index>', methods=['POST'])
 def delete_order(index):
-    from_page = request.args.get('from_page')
-    if from_page == 'luigi':
-        # Create Luigi's independent list
-        luigi_orders = copy.deepcopy(orders)
-        if 0 <= index < len(luigi_orders):
-            luigi_orders.pop(index)
-        return render_template('luigi_orders.html', luigi_orders=luigi_orders)
-    elif from_page == 'mario':
-        if 0 <= index < len(orders):
-            orders.pop(index)
-        return redirect(url_for('mario_orders_overview'))
-
+    # Ensure the index is valid and remove the order
+    if 0 <= index < len(orders):
+        orders.pop(index)
+    return redirect(url_for('luigi_orders_page'))
 
 if __name__ == '__main__':
     app.run(debug=True)
