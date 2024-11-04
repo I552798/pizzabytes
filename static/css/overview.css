@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5b5;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    text-align: left;
+    padding: 15px;
+}
+
+header a button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Lobster', cursive;
+    border-radius: 5px;
+    cursor: pointer;
+} 
+header a button.menu {
+    background-color: green;
+    color: white;
+    border: 0.5px solid #000000;
+}
+
+header a button.order-overview {
+    background-color: white;
+    color: black;
+    border: 0.5px solid #000000;
+}
+
+header a button.order-status {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 0.5px solid #000000;
+}
+
+header a button.menu:hover {
+    background-color: #32cd32;
+}
+
+header a button.order-overview:hover {
+    background-color: #e0e0e0;
+}
+
+header a button.order-status:hover {
+    background-color: #cc0000;
+}
+
+h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 4rem;
+    margin: 20px 0;
+    color: #ffffff;
+    background-color: green;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+img[alt="logo"] {
+    width: 250px;
+}
+
+form {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: nowrap; 
+    justify-content: space-between; 
+    gap: 10px;
+}
+
+form div {
+    background: linear-gradient(to bottom, #B63F1A, #ff8c66);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 23%; 
+    min-height: 450px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0; 
+}
+
+form div img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+form div h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+form div p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 15px; 
+}
+
+form div label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+    display: block;
+    margin: 10px 0 5px; 
+}
+
+form div input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(2);
+}
+
+form div input[type="number"], 
+form div input[type="text"] {
+    width: 80%; 
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 1rem;
+}
+
+.order-button {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.order-button .submit-button {
+    background-color: #008000;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    text-decoration: none; 
+    display: inline-block;
+}
+
+.order-button .submit-button:hover {
+    background-color: #32cd33;
+}
+
+/* k */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+}
+
+.redButton {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 0.5px solid #000000;
+    font-family: 'Lobster', cursive; 
+    padding: 10px 20px; 
+    border-radius: 5px;
+    font-size: 17px;
+    margin-left: 0;
+    cursor: pointer;
+    margin-left: 20px; 
+}
+
+.greenButton {
+    background-color: green;
+    color: #ffffff;
+    border: 0.5px solid #000000;
+    font-family: 'Lobster', cursive; 
+    padding: 10px 20px; 
+    border-radius: 5px;
+    font-size: 17px;
+    margin-left: 0;
+    cursor: pointer;
+    margin-left: auto; 
+    margin-right: 20px;
+}
+
+.redButton:hover {
+    background-color: #cc0000; 
+}
+
+.greenButton:hover {
+    background-color: #006400; 
+}
+
+.font {
+    font-family: 'Lobster', cursive; 
+}
+
+.payment {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 0.5px solid #000000;
+    font-family: 'Lobster', cursive; 
+    padding: 10px 20px; 
+    border-radius: 5px;
+    font-size: 35px;
+    margin-left: 0;
+    cursor: pointer;
+    margin-left: 20px; 
+    display: block;     
+    margin-left: 550px;     
+    margin-bottom: 10px;
+}
+
+.payment:hover {
+    background-color: #cc0000; 
+}
+
+.line {
+    height: 2px; 
+    background-color: #000000; 
+    width: 80%; 
+    max-width: 600px; 
+    margin: 20px auto; 
+}
+
+.list {
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto; 
+    margin-bottom: 20px;
+}
+
+.item {
+    background-color: #B63F1A; 
+    color: white; 
+    border-radius: 10px; 
+    padding: 15px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 5px;
+}   
