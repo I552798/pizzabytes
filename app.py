@@ -77,7 +77,7 @@ def mario_orders_page():
         for pizza in menu:
             pizza_name = pizza["name"].lower()
             quantity = request.form.get(pizza_name)
-            
+
             if quantity and quantity.isdigit() and int(quantity) > 0:
                 orders.append({
                     "table": table,
