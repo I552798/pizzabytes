@@ -121,6 +121,15 @@ def delete_order(index):
     # Ensure the index is valid and remove the order
     if 0 <= index < len(orders):
         orders.pop(index)
+    
+    # Determine where to redirect based on the "from_page" query parameter
+    from_page = request.args.get('from_page')
+    if from_page == 'mario':
+        return redirect(url_for('mario_orders_overview'))
+    elif from_page == 'luigi':
+        return redirect(url_for('luigi_orders_page'))
+    
+    # Default redirect if no parameter is found
     return redirect(url_for('luigi_orders_page'))
 
 if __name__ == '__main__':
