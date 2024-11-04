@@ -1,5 +1,3 @@
-
-
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -14,6 +12,7 @@ menu = [
 
 # Orders list to store current orders
 orders = []
+ready_orders = []
 order_index = 0
 
 @app.route('/')
@@ -92,7 +91,7 @@ def mario_orders_page():
 
 @app.route('/mario/orders/overview')
 def mario_orders_overview():
-    return render_template('mario_overview.html', orders=orders)
+    return render_template('mario_overview.html', orders=orders, ready_orders=ready_orders)
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
@@ -100,27 +99,33 @@ def luigi_orders_page():
 
 @app.route('/mark_order_completed', methods=['POST'])
 def mark_next_order_completed():
-    global order_index
+    global order_index, ready_orders
 
-    data = request.get_json() 
+    data = request.get_json()
     if order_index < len(orders):
         if data and "message" in data:
-            # Decrease the quantity of the current order
+            # Decrement the quantity of the current order
             orders[order_index]["quantity"] -= 1
+
+            ready_orders.append({
+                    "name": orders[order_index]["name"],
+                    "table": orders[order_index]["table"]
+                })
             
             # Check if the quantity has reached zero
             if orders[order_index]["quantity"] <= 0:
                 orders[order_index]["status"] = "Completed"
                 order_index += 1
 
-    if order_index >= len(orders):  # Ensure the order_index is within bounds
+    # Ensure the order_index is within bounds
+    if order_index >= len(orders):
         order_index = 0
 
 @app.route('/delete_order/<int:index>', methods=['POST'])
 def delete_order(index):
-    # Ensure the index is valid and corresponds to a "Completed" order
-    if 0 <= index < len(orders):
-        orders.pop(index)
+    # Ensure the index is valid for ready_orders
+    if 0 <= index < len(ready_orders):
+        ready_orders.pop(index)
     
     # Determine where to redirect based on the "from_page" query parameter
     from_page = request.args.get('from_page')
@@ -131,6 +136,7 @@ def delete_order(index):
     
     # Default redirect if no parameter is found
     return redirect(url_for('luigi_orders_page'))
+
 
 
 if __name__ == '__main__':

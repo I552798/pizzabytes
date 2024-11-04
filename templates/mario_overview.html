@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mario.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <meta http-equiv="refresh" content="1">
     <title>Mario Order Overview</title>
 </head>
@@ -25,12 +26,11 @@
                             {% if order.status == "Preparing" %}
                             <tr>
                                 <td>{{ order.quantity }}x {{ order.name }} - </td>
-                                <td>Table: {{ order.table }}</td>
-                                <td> - {{ order.status }}</td>
+                                <td>Table {{ order.table }}</td>
                             </tr>
                             {% endif %}
                         {% endfor %}
-                        {% if not orders | selectattr('status', 'equalto', 'Preparing') | list %}
+                        {% if not orders %}
                         <tr>
                             <td colspan="3">No orders are currently being prepared.</td>
                         </tr>
@@ -44,20 +44,18 @@
                 <h2>Ready</h2>
                 <table>
                     <tbody>
-                        {% for order in orders %}
-                            {% if order.status == "Completed" %}
+                        {% for order in ready_orders %}
                             <tr>
-                                <td>{{ order.name }}</td>
-                                <td>Table: {{ order.table }}</td>
+                                <td>{{ order.name }} - </td>
+                                <td>Table {{ order.table }}</td>
                                 <td>
                                     <form action="{{ url_for('delete_order', index=loop.index0) }}?from_page=mario" method="post" style="display:inline;">
                                         <button type="submit">Delete</button>
                                     </form>
                                 </td>
                             </tr>
-                            {% endif %}
                         {% endfor %}
-                        {% if not orders | selectattr('status', 'equalto', 'Completed') | list %}
+                        {% if not ready_orders %}
                         <tr>
                             <td colspan="3">No orders are ready.</td>
                         </tr>

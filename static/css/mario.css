@@ -144,4 +144,25 @@ header h1 {
     width: 300px; /* Fixed width for the boxes */
 }
 
+form button {
+    background: white;
+    border: 1px solid #000000;
+    color: black;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    padding: 1px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px; /* Reduced margin to bring the button even closer */
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+
+form button:hover {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 1px solid #000000;
+}
+
 
