@@ -24,26 +24,24 @@
     
     <div class="form-container">
         <form action="{{ url_for('menu_page', table=table) }}" method="post">
-            {% for pizza in menu %}
-                <div>
-                    <img src="{{ url_for('static', filename='images/' ~ pizza.name | lower ~ '.png') }}" alt="{{ pizza.name }}" style="width: 150px; height: auto;">
-                    <h4>{{ pizza.name }}</h4>
-                    <p>{{ pizza.description }}</p>
-                    <p>Price: &euro;{{ pizza.price }}</p>
-                    <label>
-                        <input type="checkbox" name="selected_pizza" value="{{ pizza.name }}">
-                        Select this pizza
-                    </label>
-                    <label for="quantity_{{ pizza.name }}">Quantity:</label>
-                    <input type="number" id="quantity_{{ pizza.name }}" name="quantity_{{ pizza.name }}" min="0" placeholder="0">
-                </div>
-                <br>
-            {% endfor %}
+            <div class="pizza-list">
+                {% for pizza in menu %}
+                    <div class="pizza-item">
+                        <img src="{{ url_for('static', filename='images/' ~ pizza.name | lower ~ '.png') }}" alt="{{ pizza.name }}" style="width: 150px; height: auto;">
+                        <h4>{{ pizza.name }}</h4>
+                        <p>{{ pizza.description }}</p>
+                        <p>Price: &euro;{{ pizza.price }}</p>
+                        <label>
+                            <input type="checkbox" name="selected_pizza" value="{{ pizza.name }}">
+                            Select this pizza
+                        </label>
+                        <label for="quantity_{{ pizza.name }}">Quantity:</label>
+                        <input type="number" id="quantity_{{ pizza.name }}" name="quantity_{{ pizza.name }}" min="0" placeholder="0">
+                    </div>
+                {% endfor %}
+            </div>
             <button type="submit" class="submit-button">Place Order for Table {{ table }}</button>
         </form>
     </div>
-    <!-- <div class="order-button">
-        <a href="{{ url_for('order_overview', table=table) }}" type="submit" class="submit-button">Place Order for Table {{ table }}</a>
-    </div> -->
 </body>
 </html>
