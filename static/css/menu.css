@@ -4,6 +4,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f5f5b5;
     text-align: center;
+    color: white;
     margin: 0;
     padding: 0;
 }
@@ -66,18 +67,18 @@ h1 {
 }
 
 .pizza-list {
-    display: flex; /* Use flexbox to display items in a row */
-    justify-content: center; /* Center the items horizontally */
-    flex-wrap: nowrap; /* Prevent items from wrapping */
-    gap: 20px; /* Space between pizza items */
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: nowrap; 
+    gap: 20px; 
 }
 
 .pizza-item {
     background: linear-gradient(to bottom, #B63F1A, #ff8c66);
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 23%; /* Adjust the width to fit your layout */
-    min-width: 250px; /* Ensure a minimum width */
+    width: 23%; 
+    min-width: 250px; 
     padding: 20px;
     text-align: center;
 }
@@ -106,7 +107,6 @@ h1 {
     background-color: #32cd33;
 }
 
-/* k */
 .button-container {
     display: flex;
     align-items: center;
@@ -128,5 +128,5 @@ h1 {
 }
 
 .submit-button:hover {
-    background-color: #006400; /* Darker green on hover */
+    background-color: #006400; 
 }
