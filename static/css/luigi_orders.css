@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;700&display=swap');
+
+/* Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5b5;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    margin: 0; 
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: green;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+}
+
+header h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 3.5rem;
+    color: white;
+    margin: 0;
+}
+
+/* Main Container */
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Orders Background Container */
+ul {
+    list-style-type: none;
+    background-color: #ffffff; /* White background for all orders */
+    border-radius: 10px;
+    padding: 10px 40px; /* Reduced top and bottom padding */
+    max-width: 1200px; /* Increased width of the container */
+    width: 100%; /* Ensures it takes full available width */
+    margin: 10px; /* Margin around the container */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Light shadow for depth */
+}
+
+/* Order Item Styling */
+li {
+    padding: 10px 0; /* Space between each order */
+    border-bottom: 1px solid #ddd; /* Light border to separate orders */
+}
+
+li:last-child {
+    border-bottom: none; /* Remove bottom border for the last order */
+}
+
+/* Order Title Styling */
+li p:first-child {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Lobster', cursive;
+    color: #000;
+    margin-bottom: 1px; /* Reduced space between title and ingredients */
+    margin-top: 10px;
+}
+
+/* Order Ingredients Styling */
+li p:nth-child(2) {
+    font-size: 1rem;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Delete Button Styling */
+form {
+    display: inline-block;
+    margin-top: 10px; /* Adjusted margin to bring the button closer to the descriptions */
+}
+
+form button {
+    background: white;
+    border: 1px solid #000000;
+    color: black;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px; /* Reduced margin to bring the button even closer */
+}
+
+form button:hover {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 1px solid #000000;
+}

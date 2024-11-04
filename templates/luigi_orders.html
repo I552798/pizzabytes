@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/luigi_orders.css') }}">
     <title>Luigi orders</title>
 </head>
 <body>
     <header>
         <h1>Orders</h1>
     </header>
-    {% for order in luigi_orders %}
+    {% for order in orders %}
     <ul>
         <li>
             {% if order.quantity > 0 %}
