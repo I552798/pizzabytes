@@ -1,4 +1,5 @@
 #include "Display.h" 
+#include "DHT11.h"
 
 /* Initialisations */
 // Potentiometer 
@@ -15,50 +16,47 @@ const int greenLed = 5;
 // Buzzer
 const int buzzer = 3;
 
+// Light sensor
+int lightSensor = A2;
+
 
 /* Variables */
-// Initialise initial temperature at 0
 int currentTemp = 0;
 
 // Timer variables
-int countdownTime; // // Countdown start time 
-unsigned long previousMillis = 0; // For timing the countdown
-int interval = 1000;  // Interval of 1 second for countdown
+int countdownTime = 0; 
+unsigned long previousMillis = 0;
+int interval = 1000; 
+int countdownStart;
+bool timerActive;
 
 // Potentiometer variables
-int lastPotValue;
+int lastPotValue = 0;
+const int potThreshold = 10;
 
 
 /* Clear display, initialise pin modes and start serial communication */
 void setup() {
-  Serial.begin(9600); // Start serial communication for debugging
-  Display.clear(); // Clear display at startup
-  pinMode(redLed, OUTPUT); // Set red redLed as output
-  // Set button inputs with pull-up resistors
+  Serial.begin(9600); 
+  Display.clear(); 
+  pinMode(redLed, OUTPUT); 
   pinMode(rightButton, INPUT_PULLUP);
   pinMode(leftButton, INPUT_PULLUP);
-  // Set buzzer os output
   pinMode(buzzer, OUTPUT);
+  pinMode(lightSensor, INPUT);
 }
 
 
 /* Function to adjust and display temperature based on button presses */
 void temperature(){
-  Display.show(currentTemp); // Display current temperature value
-  // Increase temperature by 10 if the right button is pressed
+  Display.show(currentTemp);
+  // Increase temperature by 10 if the right button is pressed, max temperature = 400
   if(digitalRead(rightButton) == LOW && currentTemp < 400){
     currentTemp += 10;
-    // Debugging
-    Serial.print("Current temperature: ");
-    Serial.println(currentTemp);
   }
   // Decrease temperature by 10 if the right button is pressed
   if(digitalRead(leftButton) == LOW && currentTemp > 0){
     currentTemp -= 10;
-    // Debugging
-    Serial.print("Current temperature: ");
-    Serial.print(currentTemp);
-    Serial.print("°C");
   }
   delay(200); // Delay for button debounce
 }
@@ -66,9 +64,9 @@ void temperature(){
 
 /* Function to activate the buzzer */
 void buzzer_noise(){
-  tone(buzzer, 50); // Send 50Hz sound signal
-  delay(500); // Wait for 1 sec
-  noTone(buzzer); // Stop sound
+  tone(buzzer, 50);
+  delay(500);
+  noTone(buzzer);
 }
 
 
@@ -85,68 +83,71 @@ void timer() {
   unsigned long currentMillis = millis();
   // Check if 1 second has passed since the last update and the countdown is still running
   if (currentMillis - previousMillis >= interval && countdownTime > 0) {
-    previousMillis = currentMillis;  // Update the previousMillis to current time
-    countdownTime--; // Decrease the countdown time
-    Display.show(format_time(countdownTime)); // Display the updated and formatted countdown time
-    digitalWrite(redLed, HIGH); // Keep the red LED on while the timer is active
-    // Debugging
-    Serial.print("Time left: ");
-    Serial.print(countdownTime / 60);
-    Serial.print(" minutes and ");
-    Serial.print(countdownTime % 60);
-    Serial.println(" seconds");
+    previousMillis = currentMillis; 
+    countdownTime--; 
+    Display.show(format_time(countdownTime)); 
+    digitalWrite(redLed, HIGH);
   }
-  // If the countdown has finished
   if (countdownTime == 0) {
-    // Debugging
-    Serial.println("Oven OFF");
-    digitalWrite(redLed, LOW); // Turn of red LED
-    digitalWrite(greenLed, HIGH); // Turn on green LED to indicate that the countdown has finished
+    Serial.println("Ready");
+    digitalWrite(redLed, LOW); 
+    digitalWrite(greenLed, HIGH); 
     //buzzer_noise();
-    delay(4000); // Wait 4 seconds before turning off the green LED 
-    digitalWrite(greenLed, LOW); // Green LED off
-    Display.clear(); // Clear the display once the countdown is done
+    delay(2000); 
+    digitalWrite(greenLed, LOW);
+    timerActive = false;
+    countdownTime = countdownStart;
+    Display.show(countdownStart);
   }
+}
+
+
+/* Function to read multiple values and return their average to reduce noise */
+int smoothPotValue() {
+    int smoothedValue = 0;
+    for (int i = 0; i < 10; i++) {
+        smoothedValue += analogRead(potMeter);
+    }
+    return smoothedValue / 10; // Average of the readings
 }
 
 
 /* Main loop to read potentiometer, handle temperature adjustment, and start the timer */
 void loop(){
-  int potValue = analogRead(potMeter); // Read and save analog value from potentiometer
-  potValue = map(potValue, 0, 1023, 0, 900); // Map potentiometer value from 0-1023 to 0-900 seconds (15 minutes)
-
-  // If the potentiometer value is 0, allow temperature adjustments
+  int potValue = smoothPotValue(); 
+  potValue = map(potValue, 0, 1023, 0, 1800); // Map potentiometer value from 0-1023 to 0-1800 seconds (30 minutes)
   if(potValue == 0){
-    temperature(); // Call temperature function to adjust and display temperature
+    temperature();
+    countdownTime = 0;
   }
   else {
-    countdownTime = potValue; // Set the countdown timer based on potentiometer value
-    if (lastPotValue != potValue){
+    // Check if the potentiometer reading has changed by the specified threshold
+    if(abs(potValue - lastPotValue) > potThreshold){
+      if(potValue > lastPotValue && countdownTime < 1800){  
+        countdownTime += 10;
+      } 
+      else if(potValue < lastPotValue && countdownTime > 0){  
+        countdownTime -= 10;  
+      }
+      Display.show(format_time(countdownTime));
       lastPotValue = potValue;
-      // Debugging
-      Serial.print("Current timer value: ");
-      Serial.print(countdownTime / 60);
-      Serial.print(" minutes and ");
-      Serial.print(countdownTime % 60);
-      Serial.println(" seconds");
+      countdownStart = countdownTime;
     }
-    Display.show(format_time(countdownTime)); // Display the current countdown value in MM:SS format
-    delay(200); // Short delay to avoid quick changes
 
     // If the left button is pressed, start the countdown timer
     if(digitalRead(leftButton) == LOW){
-      // Debugging
-      Serial.println("Oven ON");
+      timerActive = true;
       delay(300); // Delay for button debounce
-      // Run the timer until countdown reaches 0
-      while(countdownTime){
-        timer(); // Call timer function to decrease and display countdown time
-
+      while(countdownTime && timerActive){
+        timer();
+        float brightness = analogRead(lightSensor);
         // If the left button is pressed again, break the loop
-        if(digitalRead(leftButton) == LOW){
+        if(digitalRead(leftButton) == LOW /*|| brightness > 800*/){
           // Debugging
-          Serial.println("Oven process terminated");
+          Serial.println("Process terminated");
           digitalWrite(redLed, LOW);
+          countdownTime = countdownStart;
+          Display.show(format_time(countdownStart));
           delay(300);
           break; // >:3
         }
