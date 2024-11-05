@@ -118,9 +118,9 @@ def mark_next_order_completed():
 
     data = request.get_json()
     
-    if orders:  # Check if there are any orders left
+    if orders:  
         if data and "message" in data:
-            current_order = orders[0]  # Get the first order
+            current_order = orders[0]  
             
             if current_order["quantity"] > 0:
                 ready_orders.append({
@@ -133,25 +133,22 @@ def mark_next_order_completed():
             
             if current_order["quantity"] <= 0:
                 current_order["status"] = "Completed"
-                orders.pop(0)  # Remove the order from the list
+                orders.pop(0)  
 
     return
 
 
 @app.route('/delete_order/<int:index>', methods=['POST'])
 def delete_order(index):
-    # Ensure the index is valid for ready_orders
     if 0 <= index < len(ready_orders):
         ready_orders.pop(index)
     
-    # Determine where to redirect based on the "from_page" query parameter
     from_page = request.args.get('from_page')
     if from_page == 'mario':
         return redirect(url_for('mario_orders_overview'))
     elif from_page == 'luigi':
         return redirect(url_for('luigi_orders_page'))
     
-    # Default redirect if no parameter is found
     return redirect(url_for('luigi_orders_page'))
 
 
