@@ -30,7 +30,7 @@ body {
     background-color: #cc0000;
 }
 
-.select-table-container {
+select-table-container {
     background-color: #ff0000; /* Red background */
     color: #ffffff; /* White text */
     padding: 20px;
@@ -118,17 +118,6 @@ header h1 {
     margin: 0;
 }
 
-.select-table-container {
-    margin-top: 30px;
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-/* Add to your existing CSS */
-
 .order-container {
     display: flex; /* Use flexbox for horizontal layout */
     justify-content: center; /* Center the boxes */
@@ -142,6 +131,16 @@ header h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
     padding: 20px; /* Padding inside the box */
     width: 300px; /* Fixed width for the boxes */
+}
+
+.order-box table {
+    width: 100%; /* Ensure the table takes full width of the box */
+    border-collapse: collapse; /* Remove spacing between table cells */
+}
+
+.order-box td {
+    text-align: center; /* Center text in table cells */
+    padding: 10px; /* Padding for table cells */
 }
 
 form button {
@@ -164,5 +163,3 @@ form button:hover {
     color: #ffffff;
     border: 1px solid #000000;
 }
-
-

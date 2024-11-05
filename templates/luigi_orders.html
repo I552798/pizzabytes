@@ -6,21 +6,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/luigi_orders.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <meta http-equiv="refresh" content="13">
-    <title>Luigi orders</title>
+    <title>Luigi Orders</title>
 </head>
 <body>
-    <header>
-        <h1>Orders</h1>
+    <header class="header">
+        <h1 class="header-title">Orders</h1>
     </header>
+    
     {% if orders | selectattr('status', 'equalto', 'Preparing') | list %}
-        <ul>
+        <ul class="order-list">
             {% for order in orders %}
                 {% if order.quantity > 0 and order.status == "Preparing" %}
-                    <li>
-                        <p>{{order.quantity}}x {{order.name}} </p>
-                        <p>{{order.description}}</p>
-                        <form action="{{ url_for('delete_order', index=loop.index0) }}?from_page=luigi" method="post" style="display:inline;">
-                            <button type="submit">Delete</button>
+                    <li class="order-item">
+                        <p class="order-quantity">{{ order.quantity }}x {{ order.name }}</p>
+                        <p class="order-description">{{ order.description }}</p>
+                        <form action="{{ url_for('delete_order', index=loop.index0) }}?from_page=luigi" method="post" class="delete-form">
+                            <button type="submit" class="delete-button">Delete</button>
                         </form>
                     </li>
                 {% endif %}
@@ -30,6 +31,4 @@
         <div class="no-orders">No orders</div>
     {% endif %}
 </body>
-
-
 </html>
