@@ -15,9 +15,11 @@ orders = []
 ready_orders = []
 order_index = 0
 
+
 @app.route('/')
 def show_menu():
     return render_template('static_menu.html', menu=menu)
+
 
 @app.route('/menu/<int:table>', methods=['GET', 'POST'])
 def menu_page(table):
@@ -46,18 +48,16 @@ def menu_page(table):
         return redirect(url_for('order_overview', table=table))
     return render_template('customer_order_page.html', menu=menu, table=table)
 
+
 @app.route('/order/overview/<int:table>')
 def order_overview(table):
-    # Step 1: Create a new list of orders that match the specified table
     filtered_orders = []
     for order in orders:
         if order['table'] == table:
-            filtered_orders.append(order)  # Add to the new list if it matches
+            filtered_orders.append(order)  
 
-    # Step 2: Calculate the total cost of the filtered orders
     total = sum(order['price'] * order['quantity'] for order in filtered_orders)
 
-    # Step 3: Render the template with only the filtered orders
     return render_template('order_overview.html', orders=filtered_orders, total=total, table=table)
 
 
@@ -65,9 +65,21 @@ def order_overview(table):
 def payment(table):
     return render_template('payment.html', table=table)
 
+
 @app.route('/order/status/<int:table>')
 def order_status(table):
-    return render_template('order_status.html', orders=orders, table=table)
+    filtered_orders = []
+    for order in orders:
+        if order['table'] == table:
+            filtered_orders.append(order) 
+    
+    filtered_ready = []
+    for order in ready_orders:
+        if order['table'] == table:
+            filtered_ready.append(order)
+
+    return render_template('order_status.html', orders=filtered_orders, table=table, ready_orders=filtered_ready)
+
 
 @app.route('/mario/orders', methods=['GET', 'POST'])
 def mario_orders_page():
@@ -89,37 +101,42 @@ def mario_orders_page():
         return redirect(url_for('mario_orders_overview'))
     return render_template('mario_orders.html')
 
+
 @app.route('/mario/orders/overview')
 def mario_orders_overview():
     return render_template('mario_overview.html', orders=orders, ready_orders=ready_orders)
+
 
 @app.route('/luigi/orders')
 def luigi_orders_page():
     return render_template('luigi_orders.html', orders=orders)
 
+
 @app.route('/mark_order_completed', methods=['POST'])
 def mark_next_order_completed():
-    global order_index, ready_orders
+    global ready_orders
 
     data = request.get_json()
-    if order_index < len(orders):
+    
+    if orders:  # Check if there are any orders left
         if data and "message" in data:
-            # Decrement the quantity of the current order
-            orders[order_index]["quantity"] -= 1
-
-            ready_orders.append({
-                    "name": orders[order_index]["name"],
-                    "table": orders[order_index]["table"]
-                })
+            current_order = orders[0]  # Get the first order
             
-            # Check if the quantity has reached zero
-            if orders[order_index]["quantity"] <= 0:
-                orders[order_index]["status"] = "Completed"
-                order_index += 1
+            if current_order["quantity"] > 0:
+                ready_orders.append({
+                    "name": current_order["name"],
+                    "table": current_order["table"],
+                    "status": "Completed"
+                })
 
-    # Ensure the order_index is within bounds
-    if order_index >= len(orders):
-        order_index = 0
+            current_order["quantity"] -= 1
+            
+            if current_order["quantity"] <= 0:
+                current_order["status"] = "Completed"
+                orders.pop(0)  # Remove the order from the list
+
+    return
+
 
 @app.route('/delete_order/<int:index>', methods=['POST'])
 def delete_order(index):
@@ -136,7 +153,6 @@ def delete_order(index):
     
     # Default redirect if no parameter is found
     return redirect(url_for('luigi_orders_page'))
-
 
 
 if __name__ == '__main__':

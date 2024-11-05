@@ -20,11 +20,21 @@
 
     <div class="list">
         {% for order in orders %}
+            {% if order.status != "Completed" %}
+                <div class="item">
+                    <p class="font">{{ order.quantity }}x {{ order.name }}</p>
+                    <p class="font">{{ order.status }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Display completed orders from ready_orders list -->
+        {% for order in ready_orders %}
             <div class="item">
-                <p class="font">{{ order.quantity }}x {{ order.name }}</p>
-                <p class="font"> {{ order.status }}</p>
+                <p class="font">{{ order.name }}</p>
+                <p class="font">{{ order.status }}</p>
             </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 </body>
 </html>
