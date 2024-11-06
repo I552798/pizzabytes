@@ -153,7 +153,6 @@ form div input[type="text"] {
     background-color: #32cd33;
 }
 
-/* k */
 .button-container {
     display: flex;
     align-items: center;
@@ -200,7 +199,12 @@ form div input[type="text"] {
 .font {
     font-family: 'Lobster', cursive; 
 }
-
+.payment-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    gap: 20px; /* Add space between the buttons */
+    margin-top: 20px;
+}
 .payment {
     background-color: #ff0000;
     color: #ffffff;
@@ -209,11 +213,8 @@ form div input[type="text"] {
     padding: 10px 20px; 
     border-radius: 5px;
     font-size: 35px;
-    margin-left: 0;
     cursor: pointer;
-    margin-left: 20px; 
-    display: block;     
-    margin-left: 550px;     
+    display: inline-block;          
     margin-bottom: 10px;
 }
 

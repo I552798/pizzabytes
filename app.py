@@ -140,8 +140,8 @@ def mark_next_order_completed():
 
 @app.route('/delete_order/<int:index>', methods=['POST'])
 def delete_order(index):
-    if 0 <= index < len(ready_orders):
-        ready_orders.pop(index)
+    if 0 <= index < len(orders):
+        orders.pop(index)
     
     from_page = request.args.get('from_page')
     if from_page == 'mario':
